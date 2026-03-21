@@ -1,0 +1,29 @@
+name: "movie_dbt"
+version: "1.0"
+config-version: 2
+
+profile: "dev"
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_modules"
+
+models:
+  movie_dbt:
+    staging:
+      +schema: stg
+      +materialized: table
+      +pre-hook: "CREATE SCHEMA IF NOT EXISTS stg"
+    marts:
+      +schema: mrt
+      +materialized: table
+      +pre-hook: "CREATE SCHEMA IF NOT EXISTS mrt"
+dispatch:
+  - macro_namespace: dbt
+    search_order: ['movie_dbt', 'dbt']
+vars:
+  schema_override: true

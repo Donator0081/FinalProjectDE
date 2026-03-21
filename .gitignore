@@ -1,0 +1,19 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+
+/airflow/dags/__pycache__
+
+/dbt/movie_dbt/dbt_packages
+/dbt/movie_dbt/target
+/dbt/movie_dbt/logs
+/dbt/movie_dbt/.user.yml
+
+.venv
+.vscode
+.idea

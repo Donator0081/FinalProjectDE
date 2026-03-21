@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: movies
+    schema: rw
+    tables:
+      - name: raw_movies
+      - name: raw_ratings
