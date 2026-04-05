@@ -15,6 +15,7 @@ with DAG(
         task_id="trigger_cleanup_tables",
         trigger_dag_id="cleanup_tables",
         wait_for_completion=True,
+        poke_interval = 5,
     )
 
     # 2. Загрузка фильмов
@@ -22,6 +23,7 @@ with DAG(
         task_id="trigger_load_movies",
         trigger_dag_id="ingest_movies",
         wait_for_completion=True,
+        poke_interval = 5,
     )
 
     # 3. Загрузка рейтингов
@@ -29,6 +31,7 @@ with DAG(
         task_id="trigger_load_ratings",
         trigger_dag_id="ingest_ratings",
         wait_for_completion=True,
+        poke_interval = 5,
     )
 
     # 4. Стаджинг
@@ -36,6 +39,7 @@ with DAG(
         task_id="trigger_transform_staging",
         trigger_dag_id="transform_staging",
         wait_for_completion=True,
+        poke_interval = 5,
     )
 
     # 5. Построение marts
@@ -43,6 +47,7 @@ with DAG(
         task_id="trigger_build_marts",
         trigger_dag_id="build_marts",
         wait_for_completion=True,
+        poke_interval = 5,
     )
 
     # Последовательность выполнения
