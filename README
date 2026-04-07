@@ -1,0 +1,109 @@
+# FinalProjectDE
+
+## Описание проекта
+
+FinalProjectDE — это проект по обработке и трансформации данных фильмов и сериалов для аналитических целей.
+Он включает следующие компоненты:
+
+* **Ingestion** — модуль для извлечения данных из источников.
+* **Airflow DAGs** — автоматизация ETL-процессов.
+* **DBT (movie_dbt)** — трансформация данных и построение моделей.
+* **Docker Compose** — контейнеризация и запуск всех сервисов.
+* **Data** — хранилище сырой и промежуточной информации.
+* **Metabase** — визуализация и аналитика данных.
+
+---
+
+## Структура проекта
+
+```
+FinalProjectDE/
+│
+├── airflow/
+│   └── dags/             # DAG-и для Apache Airflow
+│
+├── data/
+│   └── raw/              # Исходные данные
+│
+├── dbt/
+│   └── movie_dbt/        # Модели dbt для трансформации данных
+│
+├── ingestion/            # Скрипты для загрузки данных
+│
+├── docker-compose.yml    # Сборка и запуск контейнеров
+│
+└── .gitignore
+```
+
+---
+
+## Требования
+
+* Python >= 3.11
+* pip
+* Docker & Docker Compose
+* dbt-core (если используешь dbt вне Docker)
+* Metabase (через Docker или локально)
+
+---
+
+## Установка и запуск
+
+### 1. Клонируем репозиторий
+
+```bash
+git clone https://github.com/Donator0081/FinalProjectDE.git
+cd FinalProjectDE
+```
+
+### 2. Запуск через Docker Compose
+
+```bash
+docker-compose up -d
+```
+
+* Контейнеры поднимут Airflow, Metabase и все сервисы проекта.
+* Для просмотра логов: `docker-compose logs -f`
+
+---
+
+## DBT
+
+* Путь к моделям: `dbt/movie_dbt/models`
+* Запуск dbt внутри проекта:
+
+```bash
+cd dbt/movie_dbt
+dbt run
+dbt test
+```
+
+* В `dbt_project.yml` настроены схемы `stg` (staging) и `mrt` (mart).
+
+---
+
+## Airflow
+
+* DAG-и лежат в `airflow/dags`.
+* Для запуска локально можно использовать контейнер Airflow или `airflow standalone`.
+* Веб-интерфейс доступен на `http://localhost:8080`.
+
+---
+
+## Ingestion
+
+* Скрипты для извлечения данных в `ingestion/`.
+* Загрузка происходит из CSV файлов.
+
+---
+
+## Metabase
+
+* Metabase используется для визуализации и аналитики данных.
+* После поднятия через Docker Compose веб-интерфейс доступен на `http://localhost:3000`.
+* Подключение к базе данных:
+
+  * Хост: PostgreSQL (контейнер с dbt или ingestion)
+  * Порт: 5432
+  * Пользователь, пароль и база: как настроено в Docker Compose
+* Создание дашбордов и вопросов напрямую через веб-интерфейс.
